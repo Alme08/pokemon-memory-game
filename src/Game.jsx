@@ -16,10 +16,12 @@ function Game({ level }) {
         }
         for (let i = 0; i < random.length; i++) promises.push(fetch(`https://pokeapi.co/api/v2/pokemon/${random[i]}`));
 
-        const responses = await Promise.all(promises);
-        const jsonResponses = await Promise.all(responses.map(response => response.json()));
-        setData(jsonResponses)
-        setGameState('running')
+        setTimeout(async () => {
+            const responses = await Promise.all(promises);
+            const jsonResponses = await Promise.all(responses.map((response) => response.json()));
+            setData(jsonResponses);
+            setGameState("running");
+          }, 3000);
       } catch (error) {
         setGameState('error')
       }
@@ -31,7 +33,10 @@ function Game({ level }) {
 
   if(gameState === 'loading'){
     return(
-      <h1>Loading...</h1>
+        <div className="loader">
+            <img src="src\assets\pokeball-min.png" alt="Imagen de carga"/>
+            <p>Loading...</p>
+        </div>
     )
   }
   if(gameState === 'error'){
