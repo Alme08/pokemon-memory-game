@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react"
+import Card from "./components/Card";
 
 function Game({ level }) {
   const [data, setData] = useState([]);
   const [gameState, setGameState] = useState('loading');
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
+  const [clickedCards, setClickedCards] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,9 +54,13 @@ function Game({ level }) {
     )
   }
   return (
-    <>
-      hello world
-    </>
+    <div className="card">
+      {data.map((pokemon) => {
+        return (
+            <Card name={pokemon.name} img={pokemon.sprites.front_default} key={pokemon.id}/>
+        )
+      })}
+    </div>
   )
 }
 
