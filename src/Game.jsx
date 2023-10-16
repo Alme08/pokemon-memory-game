@@ -54,12 +54,22 @@ function Game({ level }) {
     )
   }
   return (
-    <div className="cards">
-      {data.map((pokemon) => {
-        return (
-            <Card name={pokemon.name} img={pokemon.sprites.front_default} key={pokemon.id}/>
-        )
-      })}
+    <div className="game">
+        <div className="info">
+            <img src="src\assets\logo.png" alt="logo" />
+            <div>
+                <p>Score: {score}</p>
+                <p>High Score: {bestScore}</p>
+            </div>
+        </div>
+    
+        <div className="cards">
+        {data.map((pokemon) => {
+            return (
+                <Card name={pokemon.name} img={pokemon.sprites.front_default} key={pokemon.id}/>
+            )
+        })}
+        </div>
     </div>
   )
 }
