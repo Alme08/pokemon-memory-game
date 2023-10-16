@@ -5,14 +5,8 @@ import MusicPlayer from "./components/MusicPlayer";
 function App(){
   const [level, setLevel] = useState(null);
 
-  if (level !== null) {
-    return(
-      <Game level={level}/>
-    )
-  }
-
   return(
-    <>
+    <>{ level === null ? 
       <div className="startScreen">
         <div className="image-container">
           <img className="logo" src='src\assets\logo.png' alt="pokemon logo" />
@@ -23,7 +17,8 @@ function App(){
           <button onClick={() => setLevel(2)}>Medium</button>
           <button onClick={() => setLevel(3)}>Hard</button>
         </div>
-      </div>
+      </div> :
+      <Game level={level}/>}
       <MusicPlayer/>
     </>
   )
