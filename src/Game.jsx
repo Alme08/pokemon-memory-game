@@ -3,10 +3,11 @@ import Card from "./components/Card";
 
 function Game({ level }) {
   const [data, setData] = useState([]);
-  const [gameState, setGameState] = useState('loading');
+  const [gameStatus, setGameStatus] = useState('loading');
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
+  const [isFlipped, setIsFlipped] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,18 +25,53 @@ function Game({ level }) {
             const responses = await Promise.all(promises);
             const jsonResponses = await Promise.all(responses.map((response) => response.json()));
             setData(jsonResponses);
-            setGameState("running");
+            setGameStatus("running");
           }, 3000);
       } catch (error) {
-        setGameState('error')
+        setGameStatus('error')
       }
     };
 
-    setGameState('loading')
+    setGameStatus('loading')
     fetchData()
   }, [level])
 
-  if(gameState === 'loading'){
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // Reset flipped cards after a delay
+      setIsFlipped(!isFlipped);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [clickedCards]);// eslint-disable-line react-hooks/exhaustive-deps
+
+  const randomArray = () => {
+    const randomData = [...data];
+    for (let i = randomData.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [randomData[i], randomData[j]] = [randomData[j], randomData[i]];
+    }
+    setData(randomData);
+  };
+
+  const handleCardClick = (cardId) => {
+    // If the card has already been clicked, reset the current score and the clicked card array
+    if (clickedCards.includes(cardId)) {
+      setGameStatus('gameOver');
+    } 
+    else {
+      setIsFlipped(!isFlipped)
+      const newScore = score + 1;
+      setScore(newScore);
+      setClickedCards([...clickedCards, cardId]);
+      console.log(clickedCards, data)
+      if (newScore > bestScore) setBestScore(newScore);
+      if (clickedCards.length === data.length - 1) setGameStatus('win');
+    }
+    randomArray();
+  };
+
+  if(gameStatus === 'loading'){
     return(
         <div className="loader">
             <img src="src\assets\pokeball-min.png" alt="Imagen de carga"/>
@@ -43,14 +79,19 @@ function Game({ level }) {
         </div>
     )
   }
-  if(gameState === 'error'){
+  if(gameStatus === 'error'){
     return(
       <h1>Error</h1>
     )
   }
-  if(gameState === 'gameOver'){
+  if(gameStatus === 'gameOver'){
     return(
       <h1>Game Over</h1>
+    )
+  }
+  if(gameStatus === 'win'){
+    return(
+      <h1>Win</h1>
     )
   }
   return (
@@ -66,7 +107,13 @@ function Game({ level }) {
         <div className="cards">
         {data.map((pokemon) => {
             return (
-                <Card name={pokemon.name} img={pokemon.sprites.front_default} key={pokemon.id}/>
+                <Card 
+                  name={pokemon.name} 
+                  img={pokemon.sprites.front_default} 
+                  id={pokemon.id} 
+                  handleCardClick={handleCardClick} 
+                  isFlipped={isFlipped}
+                  key={pokemon.id}/>
             )
         })}
         </div>
