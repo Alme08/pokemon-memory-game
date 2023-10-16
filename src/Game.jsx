@@ -54,7 +54,7 @@ function Game({ level }) {
     )
   }
   return (
-    <div className="card">
+    <div className="cards">
       {data.map((pokemon) => {
         return (
             <Card name={pokemon.name} img={pokemon.sprites.front_default} key={pokemon.id}/>
