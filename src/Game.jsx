@@ -15,7 +15,7 @@ function Game({ level }) {
         const promises = [];
         const random = [];
 
-        while (random.length <  (level * 5)) {
+        while (random.length <  (level === 3 ? 14 : (level * 5))) {
           const id = Math.floor(Math.random() * 151) + 1
           if(!random.includes(id))random.push(id);
         }
@@ -64,7 +64,6 @@ function Game({ level }) {
       const newScore = score + 1;
       setScore(newScore);
       setClickedCards([...clickedCards, cardId]);
-      console.log(clickedCards, data)
       if (newScore > bestScore) setBestScore(newScore);
       if (clickedCards.length === data.length - 1) setGameStatus('win');
     }
