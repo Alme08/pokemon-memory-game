@@ -146,13 +146,11 @@ body{
 }
 .card{
     width: 165px;
-    /* border-radius: 20px; */
-    /* perspective: 500px; */
     cursor: pointer;
-    /* position: relative; */
     aspect-ratio: 1 / 1.5;
-    transition: transform 1s ease;
-    
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    cursor: pointer;
 }
 .card.flipped {
     transform: rotateY(180deg);
@@ -162,29 +160,38 @@ body{
     transform-style: preserve-3d;
 }
 
+.front, 
+.characterHolder {
+    background-size: cover;
+    background-position: center;
+    border-radius: 25px;
+}
+
 .front {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.29);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 7px 8px 10px 8px;
+    flex-shrink: 0;
     border-radius: 20px;
+    background-color: rgba(0,0,0,0.29);
+    color: white;
+}
+
+.characterHolder {
+    width: 100%;
 }
 
 .back {
-    width: 100%;
     height: 100%;
-    /* background-color: #e74c3c; */
     background: url(../assets/cardback.png);
     backface-visibility: hidden;
     background-size: cover;
     background-position: center;
     border-radius: 20px;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     transform: rotateY(180deg);
 }
