@@ -8,6 +8,7 @@ function Game({ level }) {
   const [bestScore, setBestScore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
   const [isFlipped, setIsFlipped] = useState(true);
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,12 +38,21 @@ function Game({ level }) {
   }, [level])
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    // If shuffle happens after 1,3s then some cards appear without
+    //flipping affect 
+    const shuffleTimer = setTimeout(() => {
+      randomArray();
+    }, 800)
+    const flipTimer = setTimeout(() => {
       // Reset flipped cards after a delay
       setIsFlipped(!isFlipped);
-    }, 1000);
+      setIsClicked(false)
+    }, 1300);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(flipTimer);
+      clearTimeout(shuffleTimer);
+    }
   }, [clickedCards]);// eslint-disable-line react-hooks/exhaustive-deps
 
   const randomArray = () => {
@@ -55,6 +65,12 @@ function Game({ level }) {
   };
 
   const handleCardClick = (cardId) => {
+    // Prevents user from multiple clicks while card is flipping
+    //after timeout below isClicked is false again and user can click
+    //on the card
+    setIsClicked(true)
+    if(isClicked) return
+
     // If the card has already been clicked, reset the current score and the clicked card array
     if (clickedCards.includes(cardId)) {
       setGameStatus('gameOver');
@@ -63,11 +79,11 @@ function Game({ level }) {
       setIsFlipped(!isFlipped)
       const newScore = score + 1;
       setScore(newScore);
-      setClickedCards([...clickedCards, cardId]);
       if (newScore > bestScore) setBestScore(newScore);
+      setClickedCards([...clickedCards, cardId]);
       if (clickedCards.length === data.length - 1) setGameStatus('win');
     }
-    randomArray();
+    
   };
 
   if(gameStatus === 'loading'){
