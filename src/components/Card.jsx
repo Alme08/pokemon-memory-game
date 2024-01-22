@@ -15,10 +15,11 @@ function Card({name, img, id, handleCardClick, isFlipped}) {
                     className="tilt">
 
                 <div className="front" >
-                    <img src={img} />
-                    <p>{name}</p>
+                    <img className="characterHolder" src={img} />
+                    <p className="name">{name}</p>
                 </div>
-                <div className="back"></div>
+                <div className="back">
+                </div>
             </Tilt>
         </div>
     )
