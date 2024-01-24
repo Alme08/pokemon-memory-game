@@ -127,7 +127,10 @@ body{
 }
 
 .game{
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-bottom: 10px;
 }
 .info{
     height: fit-content;
