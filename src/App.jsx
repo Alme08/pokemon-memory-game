@@ -4,6 +4,7 @@ import MusicPlayer from "./components/MusicPlayer";
 
 function App(){
   const [level, setLevel] = useState(null);
+  const [bestScore, setBestScore] = useState(0);
 
   return(
     <>{ level === null ? 
@@ -18,7 +19,7 @@ function App(){
           <button onClick={() => setLevel(3)}>Hard</button>
         </div>
       </div> :
-      <Game level={level}/>}
+      <Game level={level} setLevel={setLevel} bestScore={bestScore} setBestScore={setBestScore}/>}
       <MusicPlayer/>
     </>
   )
