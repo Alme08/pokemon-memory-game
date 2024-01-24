@@ -164,7 +164,7 @@ body{
 .characterHolder {
     background-size: cover;
     background-position: center;
-    border-radius: 25px;
+    border-radius: 10px;
 }
 
 .front {
@@ -177,9 +177,10 @@ body{
     height: 100%;
     padding: 7px 8px 10px 8px;
     flex-shrink: 0;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: rgba(0,0,0,0.29);
     color: white;
+    font-size: 14px;
 }
 
 .characterHolder {
@@ -192,6 +193,58 @@ body{
     backface-visibility: hidden;
     background-size: cover;
     background-position: center;
-    border-radius: 20px;
+    border-radius: 10px;
     transform: rotateY(180deg);
+}
+
+
+/* win/lose modal */
+.win, .lose {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    z-index: 1;
+    gap: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 25px;
+    padding: 40px 50px;
+    box-shadow: 0px 5px 20px #113661, 0px -5px 20px #113661;
+}
+
+.win div, .lose div {
+    font-size: 28px;
+}
+
+.win button, .lose button {
+    font-family: pokemon;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px 20px;
+    border-radius: 7px;
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    -webkit-box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.29);
+    -moz-box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.29);
+    box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.29);
+    transition: scale 100ms ease;
+}
+
+.win button:hover, .lose button:hover{
+    scale: 1.05;
+}
+.win button:active, .lose button:active{
+    scale: 0.96;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
 }
