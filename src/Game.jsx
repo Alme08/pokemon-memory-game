@@ -39,12 +39,14 @@ function Game({ level, setLevel, bestScore, setBestScore }) {
   }, [level])
 
   useEffect(() => {
+
     // If shuffle happens after 1,3s then some cards appear without
     //flipping affect 
     const shuffleTimer = setTimeout(() => {
       randomArray();
     }, 800)
     const flipTimer = setTimeout(() => {
+
       // Reset flipped cards after a delay
       setIsFlipped(!isFlipped);
       setIsClicked(false)
@@ -66,6 +68,7 @@ function Game({ level, setLevel, bestScore, setBestScore }) {
   };
 
   const handleCardClick = (cardId) => {
+    
     // Prevents user from multiple clicks while card is flipping
     //after timeout below isClicked is false again and user can click
     //on the card
@@ -105,21 +108,13 @@ function Game({ level, setLevel, bestScore, setBestScore }) {
         </div>
     )
   }
+
   if(gameStatus === 'error'){
     return(
       <h1>Error</h1>
     )
   }
-  // if(gameStatus === 'gameOver'){
-  //   return(
-  //     <h1>Game Over</h1>
-  //   )
-  // }
-  // if(gameStatus === 'win'){
-  //   return(
-  //     <h1>Win</h1>
-  //   )
-  // }
+
   return (
     <div className="game">
         <div className="info">
