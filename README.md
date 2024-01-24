@@ -1,1 +1,1 @@
-# Pokémon memory card game with React
+# Pokémon memory card game with React and pokeApi
