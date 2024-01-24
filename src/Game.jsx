@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react"
+import { AnimatePresence } from "framer-motion";
 import Card from "./components/Card";
+import GameOver from "./components/gameOver";
 
-function Game({ level }) {
+function Game({ level, setLevel, bestScore, setBestScore }) {
   const [data, setData] = useState([]);
   const [gameStatus, setGameStatus] = useState('loading');
   const [score, setScore] = useState(0);
-  const [bestScore, setBestScore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
   const [isFlipped, setIsFlipped] = useState(true);
   const [isClicked, setIsClicked] = useState(false);
@@ -83,8 +84,18 @@ function Game({ level }) {
       setClickedCards([...clickedCards, cardId]);
       if (clickedCards.length === data.length - 1) setGameStatus('win');
     }
-    
   };
+
+  const restartTheGame = () => {
+    setIsFlipped(!isFlipped)
+    setScore(0)
+    setClickedCards([])
+    setGameStatus("running")
+  }
+
+  const quit = () => {
+    setLevel(null)
+  }
 
   if(gameStatus === 'loading'){
     return(
@@ -99,16 +110,16 @@ function Game({ level }) {
       <h1>Error</h1>
     )
   }
-  if(gameStatus === 'gameOver'){
-    return(
-      <h1>Game Over</h1>
-    )
-  }
-  if(gameStatus === 'win'){
-    return(
-      <h1>Win</h1>
-    )
-  }
+  // if(gameStatus === 'gameOver'){
+  //   return(
+  //     <h1>Game Over</h1>
+  //   )
+  // }
+  // if(gameStatus === 'win'){
+  //   return(
+  //     <h1>Win</h1>
+  //   )
+  // }
   return (
     <div className="game">
         <div className="info">
@@ -120,18 +131,24 @@ function Game({ level }) {
         </div>
     
         <div className="cards">
-        {data.map((pokemon) => {
-            return (
-                <Card 
-                  name={pokemon.name} 
-                  img={pokemon.sprites.front_default} 
-                  id={pokemon.id} 
-                  handleCardClick={handleCardClick} 
-                  isFlipped={isFlipped}
-                  key={pokemon.id}/>
-            )
-        })}
+          {data.map((pokemon) => {
+              return (
+                  <Card 
+                    name={pokemon.name} 
+                    img={pokemon.sprites.front_default} 
+                    id={pokemon.id} 
+                    handleCardClick={handleCardClick} 
+                    isFlipped={isFlipped}
+                    key={pokemon.id}/>
+              )
+          })}
         </div>
+
+        <AnimatePresence>
+          {(gameStatus === "gameOver" || gameStatus === "win") && 
+            <GameOver result={gameStatus} restartTheGame={restartTheGame} quit={quit}/>
+          }
+        </AnimatePresence>
     </div>
   )
 }
