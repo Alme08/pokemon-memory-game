@@ -11,7 +11,7 @@ function Card({name, img, id, handleCardClick, isFlipped}) {
                     glareMaxOpacity={0.4}
                     glareColor="#ffffff"
                     glarePosition="all"
-                    glareBorderRadius="20px"
+                    glareBorderRadius="10px"
                     className="tilt">
 
                 <div className="front" >
