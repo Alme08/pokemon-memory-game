@@ -27,7 +27,7 @@ function Game({ level, setLevel, bestScore, setBestScore }) {
             const responses = await Promise.all(promises);
             const jsonResponses = await Promise.all(responses.map((response) => response.json()));
             setData(jsonResponses);
-            setGameStatus("running");
+            setGameStatus('running');
           }, 3000);
       } catch (error) {
         setGameStatus('error')
@@ -68,7 +68,7 @@ function Game({ level, setLevel, bestScore, setBestScore }) {
   };
 
   const handleCardClick = (cardId) => {
-    
+
     // Prevents user from multiple clicks while card is flipping
     //after timeout below isClicked is false again and user can click
     //on the card
@@ -93,7 +93,7 @@ function Game({ level, setLevel, bestScore, setBestScore }) {
     setIsFlipped(!isFlipped)
     setScore(0)
     setClickedCards([])
-    setGameStatus("running")
+    setGameStatus('running')
   }
 
   const quit = () => {
@@ -102,8 +102,8 @@ function Game({ level, setLevel, bestScore, setBestScore }) {
 
   if(gameStatus === 'loading'){
     return(
-        <div className="loader">
-            <img src="src\assets\pokeball-min.png" alt="Imagen de carga"/>
+        <div className='loader'>
+            <img src='src\assets\pokeball-min.png' alt='Imagen de carga'/>
             <p>Loading...</p>
         </div>
     )
@@ -111,21 +111,24 @@ function Game({ level, setLevel, bestScore, setBestScore }) {
 
   if(gameStatus === 'error'){
     return(
-      <h1>Error</h1>
+      <div className='error'>
+        <h1>Something bad happened :c</h1>
+        <button onClick={quit}>Retry</button>
+      </div>
     )
   }
 
   return (
-    <div className="game">
-        <div className="info">
-            <img src="src\assets\logo.png" alt="logo" />
+    <div className='game'>
+        <div className='info'>
+            <img src='src\assets\logo.png' alt='logo' />
             <div>
                 <p>Score: {score}</p>
                 <p>High Score: {bestScore}</p>
             </div>
         </div>
     
-        <div className="cards">
+        <div className='cards'>
           {data.map((pokemon) => {
               return (
                   <Card 
@@ -140,7 +143,7 @@ function Game({ level, setLevel, bestScore, setBestScore }) {
         </div>
 
         <AnimatePresence>
-          {(gameStatus === "gameOver" || gameStatus === "win") && 
+          {(gameStatus === 'gameOver' || gameStatus === 'win') && 
             <GameOver result={gameStatus} restartTheGame={restartTheGame} quit={quit}/>
           }
         </AnimatePresence>
