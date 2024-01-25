@@ -126,11 +126,16 @@ body{
     100% { transform: rotate(360deg); }
 }
 
-.game{
+.game, .error{
     display: flex;
     flex-direction: column;
     flex: 1;
     margin-bottom: 10px;
+}
+.error{
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
 }
 .info{
     height: fit-content;
@@ -223,7 +228,7 @@ body{
     font-size: 28px;
 }
 
-.win button, .lose button {
+.win button, .lose button, .error button {
     font-family: pokemon;
     font-size: 20px;
     font-weight: bold;
@@ -237,10 +242,10 @@ body{
     transition: scale 100ms ease;
 }
 
-.win button:hover, .lose button:hover{
+.win button:hover, .lose button:hover, .error button:hover{
     scale: 1.05;
 }
-.win button:active, .lose button:active{
+.win button:active, .lose button:active, .error button:active{
     scale: 0.96;
 }
 

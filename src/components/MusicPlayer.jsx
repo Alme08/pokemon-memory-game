@@ -19,10 +19,10 @@ function MusicPlayer() {
   return (
     <div className='musicPlayer'>
       <button onClick={togglePlay}>
-        {isPlaying ? <i className="fa-solid fa-volume-high"></i> : <i className="fa-solid fa-volume-xmark"></i>}
+        {isPlaying ? <i className='fa-solid fa-volume-high'></i> : <i className='fa-solid fa-volume-xmark'></i>}
       </button>
       <audio ref={audioRef} loop>
-        <source src="src\assets\ost.mp3" type="audio/mpeg" />
+        <source src='src\assets\ost.mp3' type='audio/mpeg' />
         Tu navegador no soporta la reproducción de audio.
       </audio>
     </div>

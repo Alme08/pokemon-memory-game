@@ -1,5 +1,4 @@
-// import { useState } from "react";
-import Tilt from "react-parallax-tilt";
+import Tilt from 'react-parallax-tilt';
 
 function Card({name, img, id, handleCardClick, isFlipped}) {
 
@@ -9,16 +8,16 @@ function Card({name, img, id, handleCardClick, isFlipped}) {
                     reset
                     glareEnable={true}
                     glareMaxOpacity={0.4}
-                    glareColor="#ffffff"
-                    glarePosition="all"
-                    glareBorderRadius="10px"
-                    className="tilt">
+                    glareColor='#ffffff'
+                    glarePosition='all'
+                    glareBorderRadius='10px'
+                    className='tilt'>
 
-                <div className="front" >
-                    <img className="characterHolder" src={img} />
-                    <p className="name">{name}</p>
+                <div className='front' >
+                    <img className='characterHolder' src={img} />
+                    <p className='name'>{name}</p>
                 </div>
-                <div className="back">
+                <div className='back'>
                 </div>
             </Tilt>
         </div>
