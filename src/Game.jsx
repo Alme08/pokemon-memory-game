@@ -121,7 +121,7 @@ function Game({ level, setLevel, bestScore, setBestScore }) {
   return (
     <div className='game'>
         <div className='info'>
-            <img src='src\assets\logo.png' alt='logo' />
+            <img src='src\assets\logo.png' alt='logo' onClick={quit} />
             <div>
                 <p>Score: {score}</p>
                 <p>High Score: {bestScore}</p>

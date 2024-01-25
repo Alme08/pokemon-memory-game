@@ -144,6 +144,14 @@ body{
 }
 .info img{
     width: 500px;
+    cursor: pointer;
+    transition: scale 100ms ease;
+}
+.info img:hover{
+    scale: 1.05;
+}
+.info img:active{
+    scale: 0.9
 }
 .cards{
     margin: 0 50px;
