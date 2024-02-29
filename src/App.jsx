@@ -10,7 +10,7 @@ function App(){
     <>{ level === null ? 
       <div className='startScreen'>
         <div className='image-container'>
-          <img className='logo' src='assets/logo.png' alt='pokemon logo' />
+          <img className='logo' src='.\src\assets\logo.png' alt='pokemon logo' />
         </div>
         <h1>Memory Game</h1>
         <div className='groupButton'>
