@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { AnimatePresence } from "framer-motion";
 import Card from "./components/Card";
-import GameOver from "./components/gameOver";
+import GameOver from "./components/GameOver";
 
 function Game({ level, setLevel, bestScore, setBestScore }) {
   const [data, setData] = useState([]);
